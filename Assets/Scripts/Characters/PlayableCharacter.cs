@@ -1,9 +1,11 @@
 // PlayableCharacter.cs
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 {
-    public float speed;
+    public int speed;
+    protected Vector2 movement;
 
     public int maxHp;
     protected int currentHp;
@@ -13,9 +15,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         currentHp = maxHp;
     }
 
-    public virtual void Movement()
+    public virtual void OnMovement(InputValue value)
     {
-
+        movement = value.Get<Vector2>();
     }
 
     public abstract void SpecialAbility();
