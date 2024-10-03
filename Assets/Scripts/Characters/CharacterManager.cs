@@ -10,7 +10,7 @@ public class CharacterManager : MonoBehaviour
     {
         currentCharacterIndex = Random.Range(0, characters.Length);
          Debug.Log($"Selected Character Index: {currentCharacterIndex}");
-        SpawnCharacter(currentCharacterIndex);
+        SpawnCharacter(currentCharacterIndex, transform.position);
     }
 
     private void Update()
@@ -23,18 +23,19 @@ public class CharacterManager : MonoBehaviour
 
     private void SwitchCharacter()
     {
+        Vector3 currentPosition = currentCharacterInstance.transform.position;
         if (currentCharacterInstance != null)
         {
             Destroy(currentCharacterInstance.gameObject);
         }
 
         currentCharacterIndex = (currentCharacterIndex + 1) % characters.Length;
-        SpawnCharacter(currentCharacterIndex);
+        SpawnCharacter(currentCharacterIndex, currentPosition);
     }
 
-    private void SpawnCharacter(int index)
+    private void SpawnCharacter(int index, Vector3 spawnPosition)
     {
-         Debug.Log($"Spawning Character: {characters[index].name}");
-        currentCharacterInstance = Instantiate(characters[index], transform.position, Quaternion.identity);
+        Debug.Log($"Spawning Character: {characters[index].name}");
+        currentCharacterInstance = Instantiate(characters[index], spawnPosition, Quaternion.identity);
     }
 }
