@@ -4,18 +4,11 @@ using UnityEngine.InputSystem;
 
 public class BlackCat : PlayableCharacter
 {
-    private SpriteRenderer spriteRenderer;
-
-    public Sprite[] walkAnimationSprites;
-    public Sprite[] jumpAnimationSprites;
-
-    public float animationFrameDuration = 0.1f;
-
     private bool isJumping = false;
 
-    private void Awake()
+    protected override void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Start(); 
     }
 
     public override void SpecialAbility()
@@ -43,20 +36,6 @@ public class BlackCat : PlayableCharacter
 
     public override void OnMovement(InputValue value)
     {
-        base.OnMovement(value);
-
-        if (!isJumping && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
-        {
-            StartCoroutine(PlayWalkAnimation());
-        }
-    }
-
-    private IEnumerator PlayWalkAnimation()
-    {
-        for (int i = 0; i < walkAnimationSprites.Length; i++)
-        {
-            spriteRenderer.sprite = walkAnimationSprites[i];
-            yield return new WaitForSeconds(animationFrameDuration);
-        }
+        base.OnMovement(value); 
     }
 }

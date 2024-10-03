@@ -1,29 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class CalicoCat : PlayableCharacter
 {
-    private SpriteRenderer spriteRenderer;
-
-    public Sprite[] walkAnimationSprites;
-
-    private void Awake()
+        protected override void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Start(); 
     }
 
     public override void SpecialAbility()
     {
         // TODO: ability to trip the toddler trap
-        Debug.Log("calicoCat uses special ability: trip the toddler");
+        Debug.Log("CalicoCat uses special ability: trip the toddler.");
     }
 
-    private IEnumerator PlayWalkAnimation()
+    public override void OnMovement(InputValue value)
     {
-        for (int i = 0; i < walkAnimationSprites.Length; i++)
-        {
-            spriteRenderer.sprite = walkAnimationSprites[i];
-            yield return new WaitForSeconds(0.1f);
-        }
+        base.OnMovement(value); 
     }
 }
+
+

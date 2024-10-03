@@ -102,7 +102,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   maxHp: 0
-  walkAnimationSprites: []
+  walkDownSprites:
+  - {fileID: -1430339421, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1501629489, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 263042844, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1119872096, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  walkUpSprites:
+  - {fileID: -97980573, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1481691650, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: -1846865065, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: -1920450533, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  walkLeftSprites:
+  - {fileID: 637623471, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 679098354, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 831799321, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1054803996, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  walkRightSprites:
+  - {fileID: 1400603295, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1158835693, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 54371408, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  - {fileID: 1343060729, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
+  jumpAnimationSprites: []
+  animationFrameDuration: 0.1
+  walkDownSprites: []
+  walkUpSprites: []
+  walkLeftSprites: []
+  walkRightSprites: []
   jumpAnimationSprites: []
   animationFrameDuration: 0.1
 --- !u!50 &6813438552140387600
