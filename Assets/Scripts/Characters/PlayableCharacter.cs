@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 {
@@ -20,7 +20,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public Sprite[] jumpAnimationSprites;
     public float animationFrameDuration = 0.1f;
 
-    protected virtual void Awake() 
+    private Coroutine walkAnimationCoroutine; 
+    private bool isWalking; 
+
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,9 +37,27 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public virtual void OnMovement(InputValue value)
     {
         movement = value.Get<Vector2>();
+
         if (movement != Vector2.zero)
         {
-            StartCoroutine(PlayWalkAnimation()); 
+            if (walkAnimationCoroutine == null)
+            {
+                walkAnimationCoroutine = StartCoroutine(PlayWalkAnimation());
+            }
+        }
+        else
+        {
+            if (walkAnimationCoroutine != null)
+            {
+                StopCoroutine(walkAnimationCoroutine);
+                walkAnimationCoroutine = null; 
+            }
+
+            Sprite[] currentWalkSprites = GetCurrentWalkSprites();
+            if (currentWalkSprites != null && currentWalkSprites.Length > 0)
+            {
+                spriteRenderer.sprite = currentWalkSprites[0]; 
+            }
         }
     }
 
@@ -52,15 +73,26 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     private IEnumerator PlayWalkAnimation()
     {
         Sprite[] currentWalkSprites = GetCurrentWalkSprites();
+        int index = 0;
 
-        if (currentWalkSprites != null)
+        
+        while (movement != Vector2.zero)
         {
-            for (int i = 0; i < currentWalkSprites.Length; i++)
+            if (currentWalkSprites != null && currentWalkSprites.Length > 0)
             {
-                spriteRenderer.sprite = currentWalkSprites[i];
+                spriteRenderer.sprite = currentWalkSprites[index];
+                index = (index + 1) % currentWalkSprites.Length; 
                 yield return new WaitForSeconds(animationFrameDuration);
             }
+            else
+            {
+                yield break; 
+            }
+
+            currentWalkSprites = GetCurrentWalkSprites(); 
         }
+
+        walkAnimationCoroutine = null; 
     }
 
     private Sprite[] GetCurrentWalkSprites()

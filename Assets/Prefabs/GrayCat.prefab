@@ -50,7 +50,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   maxHp: 0
-  walkAnimationSprites: []
+  walkDownSprites:
+  - {fileID: -419175978, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 919915365, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 965486026, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -1585930058, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  walkUpSprites:
+  - {fileID: -657671630, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 323361322, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 434984683, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1013728153, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  walkLeftSprites:
+  - {fileID: -1167201826, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -1421919755, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1605878909, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 69121933, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  walkRightSprites:
+  - {fileID: -1964593875, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -410260464, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -347517997, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 2139006075, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  jumpAnimationSprites: []
+  animationFrameDuration: 0.1
 --- !u!212 &2150424125506085919
 SpriteRenderer:
   m_ObjectHideFlags: 0

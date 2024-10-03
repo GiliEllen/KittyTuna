@@ -102,7 +102,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   maxHp: 0
-  walkAnimationSprites: []
+  walkDownSprites:
+  - {fileID: 486288590, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 552375664, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -671698725, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 498199488, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  walkUpSprites:
+  - {fileID: -1240050034, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -1682083816, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -309088238, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -2069591621, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  walkLeftSprites:
+  - {fileID: -473103770, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -612911014, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 1759039274, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -766028717, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  walkRightSprites:
+  - {fileID: -214614297, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 1950214854, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -580574000, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -1829253801, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  jumpAnimationSprites: []
+  animationFrameDuration: 0.1
 --- !u!58 &2799219128906807470
 CircleCollider2D:
   m_ObjectHideFlags: 0
