@@ -1,4 +1,3 @@
-// BlackCat.cs
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
@@ -13,16 +12,10 @@ public class BlackCat : PlayableCharacter
     public float animationFrameDuration = 0.1f;
 
     private bool isJumping = false;
-    private Rigidbody2D rb;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void FixedUpdate() {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
     public override void SpecialAbility()
@@ -50,14 +43,13 @@ public class BlackCat : PlayableCharacter
 
     public override void OnMovement(InputValue value)
     {
-        base.OnMovement(value); 
+        base.OnMovement(value);
 
         if (!isJumping && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
             StartCoroutine(PlayWalkAnimation());
         }
     }
-
 
     private IEnumerator PlayWalkAnimation()
     {
@@ -66,16 +58,5 @@ public class BlackCat : PlayableCharacter
             spriteRenderer.sprite = walkAnimationSprites[i];
             yield return new WaitForSeconds(animationFrameDuration);
         }
-    }
-
-    public override void TakeDamage(int howMuch)
-    {
-        base.TakeDamage(howMuch);
-    }
-
-    public override void Die()
-    {
-        base.Die();
-        Debug.Log("BlackCat has died.");
     }
 }
