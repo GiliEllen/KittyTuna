@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  maxHp: 0
+  maxHp: 3
+  currentHp: 3
   walkDownSprites:
   - {fileID: 486288590, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   - {fileID: 552375664, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}

@@ -8,7 +8,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     protected Vector2 movement;
 
     public int maxHp;
-    protected int currentHp;
+    public int currentHp;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
@@ -23,6 +23,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     private Coroutine walkAnimationCoroutine; 
     private bool isWalking; 
 
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,9 +31,16 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     }
 
     protected virtual void Start()
-    {
-        currentHp = maxHp;
+    {   
+        Debug.Log($"Max HP: {maxHp}");
+        currentHp = 3;
     }
+
+    public int CurrentHp
+    {
+        get { return currentHp; }
+    }
+
 
     public virtual void OnMovement(InputValue value)
     {
@@ -65,7 +73,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         if (movement != Vector2.zero)
         {
-            Debug.Log("Movement Input: " + movement);
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
         }
     }
@@ -122,14 +129,19 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public abstract void SpecialAbility();
 
-    public virtual void TakeDamage(int howMuch)
+    public void TakeDamage(int howMuch)
     {
         currentHp -= howMuch;
+        if (currentHp < 0) currentHp = 0;
+
+        FindObjectOfType<HPDisplayManager>().UpdateHP(this);
+
         if (currentHp <= 0)
         {
             Die();
         }
     }
+
 
     public virtual void Die()
     {
