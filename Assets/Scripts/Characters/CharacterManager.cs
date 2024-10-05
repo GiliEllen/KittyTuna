@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -7,12 +8,19 @@ public class CharacterManager : MonoBehaviour
     private int currentCharacterIndex = 0;
     private PlayableCharacter currentCharacterInstance;
     private CinemachineVirtualCamera virtualCamera;
+    private Dictionary<string, int> catHPs = new Dictionary<string, int>();
 
     private void Start()
     {
         currentCharacterIndex = Random.Range(0, characters.Length);
         Debug.Log($"Selected Character Index: {currentCharacterIndex}");
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+
+        foreach (var cat in characters)
+        {
+            catHPs[cat.name] = 3; 
+        }
+
         SpawnCharacter(currentCharacterIndex, transform.position);
     }
 
@@ -29,6 +37,7 @@ public class CharacterManager : MonoBehaviour
         Vector3 currentPosition = currentCharacterInstance.transform.position;
         if (currentCharacterInstance != null)
         {
+            catHPs[currentCharacterInstance.name] = currentCharacterInstance.CurrentHp;
             Destroy(currentCharacterInstance.gameObject);
         }
 
@@ -36,10 +45,20 @@ public class CharacterManager : MonoBehaviour
         SpawnCharacter(currentCharacterIndex, currentPosition);
     }
 
-    private void SpawnCharacter(int index, Vector3 spawnPosition)
+   private void SpawnCharacter(int index, Vector3 spawnPosition)
     {
         Debug.Log($"Spawning Character: {characters[index].name}");
         currentCharacterInstance = Instantiate(characters[index], spawnPosition, Quaternion.identity);
+
+        if (catHPs.TryGetValue(currentCharacterInstance.name, out int storedHP))
+        {
+            currentCharacterInstance.SetHP(storedHP);
+        }
+        else
+        {
+            currentCharacterInstance.SetHP(currentCharacterInstance.maxHP);
+        }
+
         virtualCamera.Follow = currentCharacterInstance.transform;
     }
 }

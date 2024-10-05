@@ -8,19 +8,15 @@ public class HPDisplayManager : MonoBehaviour
     public TMP_Text grayCatHPText;
     public TMP_Text calicoCatHPText;
 
-    public PlayableCharacter blackCat;
-    public PlayableCharacter grayCat;
-    public PlayableCharacter calicoCat;
-
-    private Dictionary<PlayableCharacter, TMP_Text> catHPTexts;
+    private Dictionary<string, TMP_Text> catHPTexts;
 
     void Start()
     {
-        catHPTexts = new Dictionary<PlayableCharacter, TMP_Text>
+        catHPTexts = new Dictionary<string, TMP_Text>
         {
-            { blackCat, blackCatHPText },
-            { grayCat, grayCatHPText },
-            { calicoCat, calicoCatHPText }
+            { "BlackCat", blackCatHPText },
+            { "GrayCat", grayCatHPText },
+            { "CalicoCat", calicoCatHPText }
         };
 
         UpdateAllHPDisplays(); 
@@ -28,9 +24,17 @@ public class HPDisplayManager : MonoBehaviour
 
     public void UpdateHP(PlayableCharacter cat)
     {
-        if (catHPTexts.ContainsKey(cat))
+        Debug.Log("Updating HP display");
+        string catName = cat.name.Replace("(Clone)", "").Trim();
+
+        if (catHPTexts.ContainsKey(catName))
         {
-            catHPTexts[cat].text = " " + cat.CurrentHp;
+            Debug.Log($"{cat.name} HP: {cat.CurrentHp}");
+            catHPTexts[catName].text = $"{cat.CurrentHp}"; 
+        }
+        else
+        {
+            Debug.LogError($"Character {cat.name} not found in HP display manager!");
         }
     }
 
@@ -38,15 +42,9 @@ public class HPDisplayManager : MonoBehaviour
     {
         foreach (var entry in catHPTexts)
         {
-            PlayableCharacter cat = entry.Key;
+            string catName = entry.Key;
             TMP_Text hpText = entry.Value;
-            hpText.text = " " + cat.CurrentHp;
+            hpText.text = "3";
         }
-    }
-
-   
-    void Update()
-    {
-        UpdateAllHPDisplays();
     }
 }

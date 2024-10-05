@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 101780915575597073}
   - component: {fileID: 3927799607200635581}
   - component: {fileID: 1326995498773683201}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GrayCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2799219128906807470}
   - component: {fileID: 4431719361807607678}
   - component: {fileID: 4958665300754469740}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CalicoCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

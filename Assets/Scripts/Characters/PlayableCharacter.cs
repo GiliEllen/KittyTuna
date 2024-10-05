@@ -7,8 +7,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public float speed;
     protected Vector2 movement;
 
-    public int maxHp;
-    public int currentHp;
+    public int maxHP = 3;  // Maximum HP
+    public int CurrentHp { get; private set; }
 
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
@@ -28,17 +28,24 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Debug.Log($"Initial HP: {CurrentHp}");
     }
 
     protected virtual void Start()
     {   
-        Debug.Log($"Max HP: {maxHp}");
-        currentHp = 3;
+        if (CurrentHp <= 0) 
+        {
+            CurrentHp = maxHP;
+        }
+        Debug.Log($"start HP: {CurrentHp}");
+        FindObjectOfType<HPDisplayManager>().UpdateHP(this);
     }
 
-    public int CurrentHp
+    public void SetHP(int hp)
     {
-        get { return currentHp; }
+        CurrentHp = hp;
+        Debug.Log($"Setting HP to: {CurrentHp}");
+        FindObjectOfType<HPDisplayManager>().UpdateHP(this); 
     }
 
 
@@ -131,12 +138,14 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public void TakeDamage(int howMuch)
     {
-        currentHp -= howMuch;
-        if (currentHp < 0) currentHp = 0;
+        Debug.Log($"Current HP before damage: {CurrentHp}");
+        CurrentHp -= howMuch;
+        Debug.Log($"Current HP after damage: {CurrentHp}");
+        if (CurrentHp < 0) CurrentHp = 0;
 
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
 
-        if (currentHp <= 0)
+        if (CurrentHp <= 0)
         {
             Die();
         }

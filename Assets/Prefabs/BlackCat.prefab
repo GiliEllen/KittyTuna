@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6813438552140387600}
   - component: {fileID: 1200591676442724164}
   - component: {fileID: -5690587985404738607}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlackCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
