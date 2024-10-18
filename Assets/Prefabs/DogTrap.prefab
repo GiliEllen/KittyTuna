@@ -94,12 +94,15 @@ MonoBehaviour:
   whatIDamage:
     serializedVersion: 2
     m_Bits: 8
+  maxHP: 1
   idleAnimationFrames:
   - {fileID: -748737197, guid: b411154581755cd40986f4254e233f76, type: 3}
   - {fileID: -246196423, guid: b411154581755cd40986f4254e233f76, type: 3}
   triggeredAnimationFrames:
   - {fileID: -1815425010, guid: b411154581755cd40986f4254e233f76, type: 3}
   - {fileID: 1899946214, guid: b411154581755cd40986f4254e233f76, type: 3}
+  SleepAnimationFrames:
+  - {fileID: -1152351115, guid: b411154581755cd40986f4254e233f76, type: 3}
   damageEffectPrefab: {fileID: 3447674579603814970, guid: 5d42cc0dcbfd5354484201c58fd73981, type: 3}
 --- !u!212 &1782411096873019012
 SpriteRenderer:

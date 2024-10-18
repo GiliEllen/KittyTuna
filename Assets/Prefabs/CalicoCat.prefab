@@ -101,8 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  maxHp: 3
-  currentHp: 3
+  maxHP: 3
   walkDownSprites:
   - {fileID: 486288590, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   - {fileID: 552375664, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
@@ -123,8 +122,19 @@ MonoBehaviour:
   - {fileID: 1950214854, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   - {fileID: -580574000, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   - {fileID: -1829253801, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
-  jumpAnimationSprites: []
   animationFrameDuration: 0.1
+  catType: 0
+  isWalking: 1
+  TripAnimationFrames:
+  - {fileID: -214614297, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -695638503, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: -930207738, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 309762561, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 1258218244, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 1038034289, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 782914720, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  - {fileID: 1038034289, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
+  TripEffectPrefab: {fileID: 1645160878391404517, guid: a899443f5f2003245b14d33dbcb7cd8c, type: 3}
 --- !u!58 &2799219128906807470
 CircleCollider2D:
   m_ObjectHideFlags: 0

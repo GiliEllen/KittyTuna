@@ -17,11 +17,11 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public Sprite[] walkUpSprites;
     public Sprite[] walkLeftSprites;
     public Sprite[] walkRightSprites;
-    public Sprite[] jumpAnimationSprites;
     public float animationFrameDuration = 0.1f;
+    public CatType catType;
 
     private Coroutine walkAnimationCoroutine; 
-    private bool isWalking; 
+    public bool isWalking = true; 
 
 
     protected virtual void Awake()
@@ -51,12 +51,14 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void OnMovement(InputValue value)
     {
+        if (!isWalking) return;
         movement = value.Get<Vector2>();
 
         if (movement != Vector2.zero)
         {
             if (walkAnimationCoroutine == null)
             {
+                
                 walkAnimationCoroutine = StartCoroutine(PlayWalkAnimation());
             }
         }
@@ -78,7 +80,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     private void FixedUpdate()
     {
-        if (movement != Vector2.zero)
+        if (movement != Vector2.zero && isWalking)
         {
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
         }
@@ -88,7 +90,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         Sprite[] currentWalkSprites = GetCurrentWalkSprites();
         int index = 0;
-
         
         while (movement != Vector2.zero)
         {
@@ -111,6 +112,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     private Sprite[] GetCurrentWalkSprites()
     {
+        if (!isWalking) return null;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -134,7 +136,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         return null;
     }
 
-    public abstract void SpecialAbility();
+    public virtual void SpecialAbility() 
+    {
+        isWalking = false;
+    }
 
     public void TakeDamage(int howMuch)
     {

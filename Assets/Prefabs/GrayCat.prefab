@@ -49,8 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  maxHp: 3
-  currentHp: 3
+  maxHP: 3
   walkDownSprites:
   - {fileID: -419175978, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
   - {fileID: 919915365, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
@@ -73,6 +72,22 @@ MonoBehaviour:
   - {fileID: 2139006075, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
   jumpAnimationSprites: []
   animationFrameDuration: 0.1
+  catType: 1
+  MeowAnimationFrames:
+  - {fileID: -1634150325, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1290881696, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1471503055, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -121996205, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -597064527, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1347691014, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -1666967433, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 527246103, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -1666967433, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1347691014, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -597064527, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: -121996205, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  - {fileID: 1471503055, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
+  MeowEffectPrefab: {fileID: 1645160878391404517, guid: 291bd96f0133b094382a73f11231ad31, type: 3}
 --- !u!212 &2150424125506085919
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -50,6 +50,7 @@ MonoBehaviour:
   whatIDamage:
     serializedVersion: 2
     m_Bits: 8
+  maxHP: 1
   walkLeftSprites:
   - {fileID: -2128204956, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
   - {fileID: -855527990, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
@@ -65,7 +66,14 @@ MonoBehaviour:
   - {fileID: 264354225, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
   - {fileID: -1655032319, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
   - {fileID: 1339481392, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
+  fallingSprites:
+  - {fileID: 2015281168, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
+  - {fileID: -799517412, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
+  - {fileID: 281359358, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
+  - {fileID: -1096807851, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
+  idleSprite: {fileID: -1096807851, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
   speed: 1
+  heartEffectPrefab: {fileID: 1645160878391404517, guid: f8a9e1011e63c43419f0be13e428c243, type: 3}
 --- !u!212 &8313529129447762883
 SpriteRenderer:
   m_ObjectHideFlags: 0
