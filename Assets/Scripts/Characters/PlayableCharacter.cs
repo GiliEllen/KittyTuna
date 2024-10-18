@@ -210,7 +210,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         isPushedBack = true;
         float pushDuration = 0.7f; 
         float elapsedTime = 0f;
-        float pushSpeed = 10f; 
+        float pushSpeed = 15f; 
 
         while (elapsedTime < pushDuration)
         {
