@@ -7,7 +7,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public float speed;
     protected Vector2 movement;
 
-    public int maxHP = 3;  // Maximum HP
+    public int maxHP = 3;
     public int CurrentHp { get; private set; }
 
     protected Rigidbody2D rb;
@@ -22,6 +22,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     private Coroutine walkAnimationCoroutine; 
     public bool isWalking = true; 
+    private Coroutine hurtEffectCoroutine;
+    private bool isPushedBack = false;
 
 
     protected virtual void Awake()
@@ -37,14 +39,12 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         {
             CurrentHp = maxHP;
         }
-        Debug.Log($"start HP: {CurrentHp}");
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
     }
 
     public void SetHP(int hp)
     {
         CurrentHp = hp;
-        Debug.Log($"Setting HP to: {CurrentHp}");
         FindObjectOfType<HPDisplayManager>().UpdateHP(this); 
     }
 
@@ -143,9 +143,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public void TakeDamage(int howMuch)
     {
-        Debug.Log($"Current HP before damage: {CurrentHp}");
         CurrentHp -= howMuch;
-        Debug.Log($"Current HP after damage: {CurrentHp}");
         if (CurrentHp < 0) CurrentHp = 0;
 
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
@@ -154,8 +152,84 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         {
             Die();
         }
+        else
+        {
+            StartCoroutine(BlinkEffect());
+            Vector2 pushDirection = GetPushbackDirection();
+            if (!isPushedBack)
+            {
+                StartCoroutine(PushBack(pushDirection));
+            }
+        }
     }
 
+    private IEnumerator BlinkEffect()
+    {
+        float blinkDuration = 2f;
+        float elapsedTime = 0f;
+        bool spriteVisible = true;
+
+        while (elapsedTime < blinkDuration)
+        {
+            spriteRenderer.enabled = spriteVisible;
+            spriteVisible = !spriteVisible;
+            yield return new WaitForSeconds(0.1f);
+            elapsedTime += 0.1f;
+        }
+
+        spriteRenderer.enabled = true; 
+    }
+
+    private Vector2 GetPushbackDirection()
+    {
+        if (spriteRenderer.sprite != null)
+        {
+            if (System.Array.Exists(walkUpSprites, sprite => sprite == spriteRenderer.sprite))
+            {
+                return Vector2.down;
+            }
+            else if (System.Array.Exists(walkDownSprites, sprite => sprite == spriteRenderer.sprite))
+            {
+                return Vector2.up;
+            }
+            else if (System.Array.Exists(walkLeftSprites, sprite => sprite == spriteRenderer.sprite))
+            {
+                return Vector2.right;
+            }
+            else if (System.Array.Exists(walkRightSprites, sprite => sprite == spriteRenderer.sprite))
+            {
+                return Vector2.left;
+            }
+        }
+
+        return Vector2.zero; 
+    }
+
+    private IEnumerator PushBack(Vector2 pushDirection)
+    {
+        isPushedBack = true;
+        float pushDuration = 0.7f; 
+        float elapsedTime = 0f;
+        float pushSpeed = 10f; 
+
+        while (elapsedTime < pushDuration)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, pushDirection, pushSpeed * Time.deltaTime);
+
+            if (hit.collider != null)
+            {
+                break;
+            }
+
+            rb.MovePosition(rb.position + pushDirection * pushSpeed * Time.deltaTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        isPushedBack = false;
+        movement = Vector2.zero; 
+    }
 
     public virtual void Die()
     {
