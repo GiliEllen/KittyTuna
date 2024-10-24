@@ -14,6 +14,7 @@ public class CalicoCat : PlayableCharacter
     {
         base.Start(); 
         catType = CatType.CalicoCat;
+        catName = "Trippy";
     }
 
     public override void SpecialAbility()

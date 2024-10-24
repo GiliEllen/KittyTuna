@@ -14,6 +14,7 @@ public class BlackCat : PlayableCharacter
     {
         base.Start(); 
         catType = CatType.BlackCat;
+        catName = "Thirsty";
     }
 
     public override void SpecialAbility()

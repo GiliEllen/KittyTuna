@@ -19,6 +19,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public Sprite[] walkRightSprites;
     public float animationFrameDuration = 0.1f;
     public CatType catType;
+    public string catName;
 
     private Coroutine walkAnimationCoroutine; 
     public bool isWalking = true; 
@@ -35,6 +36,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     protected virtual void Start()
     {   
+        GameManager gameManager = GameManager.Instance;
         if (CurrentHp <= 0) 
         {
             CurrentHp = maxHP;
@@ -51,7 +53,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void OnMovement(InputValue value)
     {
-        if (!isWalking) return;
+        GameManager gameManager = GameManager.Instance;
+        if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
 
         if (movement != Vector2.zero)
@@ -151,6 +154,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         if (CurrentHp <= 0)
         {
             Die();
+            GameManager.Instance.GameOver(gameObject.name);
         }
         else
         {

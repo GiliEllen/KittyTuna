@@ -14,6 +14,7 @@ public class GrayCat : PlayableCharacter
     {
         base.Start(); 
         catType = CatType.GrayCat;
+        catName = "Meowy";
     }
     public override void SpecialAbility()
     {
