@@ -36,7 +36,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     protected virtual void Start()
     {   
-        GameManager gameManager = GameManager.Instance;
+        // GameManager gameManager = GameManager.Instance;
         if (CurrentHp <= 0) 
         {
             CurrentHp = maxHP;
@@ -53,8 +53,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void OnMovement(InputValue value)
     {
-        GameManager gameManager = GameManager.Instance;
-        if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        // GameManager gameManager = GameManager.Instance;
+        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
 
         if (movement != Vector2.zero)
@@ -154,7 +154,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         if (CurrentHp <= 0)
         {
             Die();
-            GameManager.Instance.GameOver(gameObject.name);
+            // GameManager.Instance.GameOver(gameObject.name);
         }
         else
         {
