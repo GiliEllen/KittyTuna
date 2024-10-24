@@ -25,12 +25,14 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public bool isWalking = true; 
     private Coroutine hurtEffectCoroutine;
     private bool isPushedBack = false;
+    public GameManager gameManager;
 
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
         Debug.Log($"Initial HP: {CurrentHp}");
     }
 
@@ -40,6 +42,12 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         if (CurrentHp <= 0) 
         {
             CurrentHp = maxHP;
+        }
+        gameManager = FindObjectOfType<GameManager>();
+
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager not found in the scene!");
         }
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
     }
@@ -54,7 +62,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     public virtual void OnMovement(InputValue value)
     {
         // GameManager gameManager = GameManager.Instance;
-        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
 
         if (movement != Vector2.zero)
@@ -237,6 +245,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void Die()
     {
+        gameManager.GameOver();
         Debug.Log($"{gameObject.name} has died.");
     }
 
