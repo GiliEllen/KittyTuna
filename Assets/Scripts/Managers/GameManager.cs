@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public GameOverScreen GameOverScreen;
 
     public void AddPoint() {
-        points += points;
+        points++;
+        Debug.Log(points);
     }
 
     public void GameOver() {

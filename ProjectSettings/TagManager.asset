@@ -17,7 +17,7 @@ TagManager:
   - 
   - Traps
   - onTop
-  - 
+  - birds
   - 
   - 
   - 
@@ -51,5 +51,8 @@ TagManager:
     uniqueID: 3575740241
     locked: 0
   - name: onTop
+    uniqueID: 1721395869
+    locked: 0
+  - name: birds
     uniqueID: 1721395869
     locked: 0

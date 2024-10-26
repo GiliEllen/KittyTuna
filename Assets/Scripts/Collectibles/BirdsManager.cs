@@ -30,7 +30,7 @@ public class BirdsManager : MonoBehaviour
         for (int i = 0; i < birdColors.Length; i++)
         {
             if (i >= birdSpawnersArray.Length) break;
-            if (i >= 2) break;
+            // if (i >= 2) break;
 
             birdSpawnersArray[i].assignedBirdColor = birdColors[i];
             birdSpawnersArray[i].GenerateBird(birdSpritesDictionary[birdColors[i]], gameManager, birdColors[i]);
