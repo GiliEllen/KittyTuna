@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1131088499575969841}
   - component: {fileID: 2121913336947095175}
   - component: {fileID: 1782411096873019012}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: DogTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
-  m_RendererPriority: 0
+  m_RendererPriority: 10
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -142,9 +142,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1296279511
+  m_SortingLayer: 2
+  m_SortingOrder: 25
   m_Sprite: {fileID: 213042156, guid: b411154581755cd40986f4254e233f76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

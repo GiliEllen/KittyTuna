@@ -124,7 +124,9 @@ MonoBehaviour:
   - {fileID: -1829253801, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   animationFrameDuration: 0.1
   catType: 0
+  catName: 
   isWalking: 1
+  gameManager: {fileID: 0}
   TripAnimationFrames:
   - {fileID: -214614297, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
   - {fileID: -695638503, guid: 1154ef65e53a71f4b91435ec4baf6d69, type: 3}
@@ -167,7 +169,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.2}
   serializedVersion: 2
   m_Radius: 0.2
 --- !u!50 &4431719361807607678

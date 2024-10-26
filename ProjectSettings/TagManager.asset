@@ -11,12 +11,12 @@ TagManager:
   - cats
   - Water
   - UI
+  - tiles
+  - 
+  - 
+  - 
   - Traps
-  - 
-  - 
-  - 
-  - 
-  - 
+  - onTop
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: furnitures
+    uniqueID: 3472099055
+    locked: 0
+  - name: traps
+    uniqueID: 2998687785
+    locked: 0
+  - name: cats
+    uniqueID: 3575740241
+    locked: 0
+  - name: onTop
+    uniqueID: 1721395869
     locked: 0

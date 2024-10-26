@@ -122,10 +122,11 @@ MonoBehaviour:
   - {fileID: 1158835693, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
   - {fileID: 54371408, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
   - {fileID: 1343060729, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
-  jumpAnimationSprites: []
   animationFrameDuration: 0.1
   catType: 0
+  catName: 
   isWalking: 1
+  gameManager: {fileID: 0}
   DrinkAnimationFrames:
   - {fileID: -304293824, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
   - {fileID: -558781863, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
@@ -194,7 +195,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.2}
   serializedVersion: 2
   m_Radius: 0.2
 --- !u!114 &-5690587985404738607

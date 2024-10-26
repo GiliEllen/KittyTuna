@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8313529129447762883}
   - component: {fileID: 3468704156293145352}
   - component: {fileID: 6170992398741449504}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ToddlerTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
-  m_RendererPriority: 0
+  m_RendererPriority: 10
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -112,9 +112,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: -1296279511
+  m_SortingLayer: 2
+  m_SortingOrder: 25
   m_Sprite: {fileID: -855527990, guid: 6010831ef3b38c14fb44e42d9b8cbac3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
