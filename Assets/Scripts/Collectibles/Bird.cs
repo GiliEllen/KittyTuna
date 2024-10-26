@@ -18,6 +18,11 @@ public class Bird : MonoBehaviour
         }
     }
 
+    private void Update()
+    {       
+        PlayIdleAnimation();
+    }
+
     public void SetSprite() {
         if (spriteRenderer) {
             spriteRenderer.sprite = spritesArray[0];
@@ -32,5 +37,11 @@ public class Bird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollected();
+    }
+
+    private void PlayIdleAnimation()
+    {
+        int index = Mathf.FloorToInt(Time.time * 4) % spritesArray.Length; 
+        spriteRenderer.sprite = spritesArray[index];
     }
 }
