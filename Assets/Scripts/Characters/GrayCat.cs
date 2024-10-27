@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class GrayCat : PlayableCharacter
 {
@@ -40,33 +41,28 @@ public class GrayCat : PlayableCharacter
         PlayMeowAnimation();
         if (MeowEffectCoroutine != null) StopCoroutine(MeowEffectCoroutine);
         MeowEffectCoroutine = StartCoroutine(MeowEffect());
-        if (MeowAnimationCoroutine != null) StopCoroutine(MeowAnimationCoroutine);
-        MeowAnimationCoroutine = StartCoroutine(PlayMeowAnimation());
+        // if (MeowAnimationCoroutine != null) StopCoroutine(MeowAnimationCoroutine);
+        // MeowAnimationCoroutine = StartCoroutine(PlayMeowAnimation());
     }
 
-    private IEnumerator PlayMeowAnimation()
-    {
-        float animationDuration = 2f;
-        float elapsedTime = 0f;
-        int index = 0;
+    private async void PlayMeowAnimation()
+    {   
+        canMove = false;
 
-        while (elapsedTime < animationDuration)
-        {
-            spriteRenderer.sprite = MeowAnimationFrames[index];
-            index = (index + 1) % MeowAnimationFrames.Length;
+        movement.x = 0;
+        movement.y = 0;
+        animator.SetBool("IsMeow", true);
 
-            yield return new WaitForSeconds(0.25f); 
+        await Task.Delay(1500);
+        animator.SetBool("IsMeow", false);
 
-            elapsedTime += 0.25f; 
-        }
-
-        spriteRenderer.sprite = MeowAnimationFrames[0];
         canMove = true;
     }
 
     public override void OnMovement(InputValue value)
     {
         if (!canMove) return; 
+        Debug.Log("why");
         // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
         if(movement.x != 0 || movement.y != 0) {
