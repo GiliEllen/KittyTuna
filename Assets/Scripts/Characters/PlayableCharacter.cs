@@ -5,12 +5,12 @@ using System.Collections;
 public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 {
     public float speed;
-    protected Vector2 movement;
+    // protected Vector2 movement;
 
     public int maxHP = 3;
     public int CurrentHp { get; private set; }
 
-    protected Rigidbody2D rb;
+    // protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
 
     public Sprite[] walkDownSprites;
@@ -30,15 +30,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        // rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = FindObjectOfType<GameManager>();
-        Debug.Log($"Initial HP: {CurrentHp}");
     }
 
     protected virtual void Start()
     {   
-        // GameManager gameManager = GameManager.Instance;
         if (CurrentHp <= 0) 
         {
             CurrentHp = maxHP;
@@ -61,90 +59,91 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void OnMovement(InputValue value)
     {
-        // GameManager gameManager = GameManager.Instance;
         if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
-        movement = value.Get<Vector2>();
+        // movement = value.Get<Vector2>();
 
-        if (movement != Vector2.zero)
-        {
-            if (walkAnimationCoroutine == null)
-            {
+        // if (movement != Vector2.zero)
+        // {
+        //     if (walkAnimationCoroutine == null)
+        //     {
                 
-                walkAnimationCoroutine = StartCoroutine(PlayWalkAnimation());
-            }
-        }
-        else
-        {
-            if (walkAnimationCoroutine != null)
-            {
-                StopCoroutine(walkAnimationCoroutine);
-                walkAnimationCoroutine = null; 
-            }
+        //         walkAnimationCoroutine = StartCoroutine(PlayWalkAnimation());
+        //     }
+        // }
+        // else
+        // {
+        //     if (walkAnimationCoroutine != null)
+        //     {
+        //         StopCoroutine(walkAnimationCoroutine);
+        //         walkAnimationCoroutine = null; 
+        //     }
 
-            Sprite[] currentWalkSprites = GetCurrentWalkSprites();
-            if (currentWalkSprites != null && currentWalkSprites.Length > 0)
-            {
-                spriteRenderer.sprite = currentWalkSprites[0]; 
-            }
-        }
+        //     Sprite[] currentWalkSprites = GetCurrentWalkSprites();
+        //     if (currentWalkSprites != null && currentWalkSprites.Length > 0)
+        //     {
+        //         spriteRenderer.sprite = currentWalkSprites[0]; 
+        //     }
+        // }
     }
 
-    private void FixedUpdate()
-    {
-        if (movement != Vector2.zero && isWalking)
-        {
-            rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-        }
-    }
+    // private void FixedUpdate()
+    // {
+    //     if (movement != Vector2.zero && isWalking)
+    //     {
+    //         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+    //     }
+    // }
 
-    private IEnumerator PlayWalkAnimation()
+    private void PlayWalkAnimation()
     {
-        Sprite[] currentWalkSprites = GetCurrentWalkSprites();
-        int index = 0;
+        Debug.Log("test");
+        // Sprite[] currentWalkSprites = GetCurrentWalkSprites();
+        // int index = 0;
         
-        while (movement != Vector2.zero)
-        {
-            if (currentWalkSprites != null && currentWalkSprites.Length > 0)
-            {
-                spriteRenderer.sprite = currentWalkSprites[index];
-                index = (index + 1) % currentWalkSprites.Length; 
-                yield return new WaitForSeconds(animationFrameDuration);
-            }
-            else
-            {
-                yield break; 
-            }
+        // while (movement != Vector2.zero)
+        // {
+        //     if (currentWalkSprites != null && currentWalkSprites.Length > 0)
+        //     {
+        //         spriteRenderer.sprite = currentWalkSprites[index];
+        //         index = (index + 1) % currentWalkSprites.Length; 
+        //         yield return new WaitForSeconds(animationFrameDuration);
+        //     }
+        //     else
+        //     {
+        //         yield break; 
+        //     }
 
-            currentWalkSprites = GetCurrentWalkSprites(); 
-        }
+        //     currentWalkSprites = GetCurrentWalkSprites(); 
+        // }
 
-        walkAnimationCoroutine = null; 
+        // walkAnimationCoroutine = null; 
     }
 
-    private Sprite[] GetCurrentWalkSprites()
+    private void GetCurrentWalkSprites()
     {
-        if (!isWalking) return null;
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Debug.Log("test");
+    //     if (!isWalking) return null;
+    //     float horizontal = Input.GetAxis("Horizontal");
+    //     float vertical = Input.GetAxis("Vertical");
 
-        if (vertical > 0) 
-        {
-            return walkUpSprites;
-        }
-        else if (vertical < 0) 
-        {
-            return walkDownSprites;
-        }
-        else if (horizontal < 0) 
-        {
-            return walkLeftSprites;
-        }
-        else if (horizontal > 0) 
-        {
-            return walkRightSprites;
-        }
+    //     if (vertical > 0) 
+    //     {
+    //         return walkUpSprites;
+    //     }
+    //     else if (vertical < 0) 
+    //     {
+    //         return walkDownSprites;
+    //     }
+    //     else if (horizontal < 0) 
+    //     {
+    //         return walkLeftSprites;
+    //     }
+    //     else if (horizontal > 0) 
+    //     {
+    //         return walkRightSprites;
+    //     }
 
-        return null;
+    //     return null;
     }
 
     public virtual void SpecialAbility() 
@@ -233,14 +232,14 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
                 break;
             }
 
-            rb.MovePosition(rb.position + pushDirection * pushSpeed * Time.deltaTime);
+            // rb.MovePosition(rb.position + pushDirection * pushSpeed * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         isPushedBack = false;
-        movement = Vector2.zero; 
+        // movement = Vector2.zero; 
     }
 
     public virtual void Die()
