@@ -31,7 +31,7 @@ public class Bird : MonoBehaviour
 
     public void HandleCollected() {
         gameObject.SetActive(false);
-        gameManager.AddPoint();
+        gameManager.AddPoint(1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
