@@ -9,12 +9,28 @@ public class GrayCat : PlayableCharacter
     private Coroutine MeowAnimationCoroutine;
     public GameObject MeowEffectPrefab;
     private bool canMove = true;
+    private Animator animator;
+    protected Vector2 movement;
+    protected Rigidbody2D rb;
+
+    private void Awake() {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
 
     protected override void Start()
     {
         base.Start(); 
         catType = CatType.GrayCat;
         catName = "Meowy";
+    }
+
+    private void FixedUpdate()
+    {
+        if (movement != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        }
     }
     public override void SpecialAbility()
     {
@@ -51,8 +67,17 @@ public class GrayCat : PlayableCharacter
     public override void OnMovement(InputValue value)
     {
         if (!canMove) return; 
+        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        movement = value.Get<Vector2>();
+        if(movement.x != 0 || movement.y != 0) {
+            animator.SetFloat("X", movement.x);
+            animator.SetFloat("Y", movement.y);
 
-        base.OnMovement(value); 
+            animator.SetBool("IsWalking", true);
+        } else {
+             animator.SetBool("IsWalking", false);
+        }
+        // base.OnMovement(value); 
     }
 
     private System.Collections.IEnumerator MeowEffect()

@@ -14,7 +14,7 @@ public class BlackCat : PlayableCharacter
     protected Rigidbody2D rb;
 
     private void Awake() {
-         rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -25,7 +25,7 @@ public class BlackCat : PlayableCharacter
         catName = "Thirsty";
     }
 
-        private void FixedUpdate()
+    private void FixedUpdate()
     {
         if (movement != Vector2.zero)
         {

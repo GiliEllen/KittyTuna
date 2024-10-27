@@ -59,91 +59,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public virtual void OnMovement(InputValue value)
     {
-        if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
-        // movement = value.Get<Vector2>();
-
-        // if (movement != Vector2.zero)
-        // {
-        //     if (walkAnimationCoroutine == null)
-        //     {
-                
-        //         walkAnimationCoroutine = StartCoroutine(PlayWalkAnimation());
-        //     }
-        // }
-        // else
-        // {
-        //     if (walkAnimationCoroutine != null)
-        //     {
-        //         StopCoroutine(walkAnimationCoroutine);
-        //         walkAnimationCoroutine = null; 
-        //     }
-
-        //     Sprite[] currentWalkSprites = GetCurrentWalkSprites();
-        //     if (currentWalkSprites != null && currentWalkSprites.Length > 0)
-        //     {
-        //         spriteRenderer.sprite = currentWalkSprites[0]; 
-        //     }
-        // }
-    }
-
-    // private void FixedUpdate()
-    // {
-    //     if (movement != Vector2.zero && isWalking)
-    //     {
-    //         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-    //     }
-    // }
-
-    private void PlayWalkAnimation()
-    {
-        Debug.Log("test");
-        // Sprite[] currentWalkSprites = GetCurrentWalkSprites();
-        // int index = 0;
-        
-        // while (movement != Vector2.zero)
-        // {
-        //     if (currentWalkSprites != null && currentWalkSprites.Length > 0)
-        //     {
-        //         spriteRenderer.sprite = currentWalkSprites[index];
-        //         index = (index + 1) % currentWalkSprites.Length; 
-        //         yield return new WaitForSeconds(animationFrameDuration);
-        //     }
-        //     else
-        //     {
-        //         yield break; 
-        //     }
-
-        //     currentWalkSprites = GetCurrentWalkSprites(); 
-        // }
-
-        // walkAnimationCoroutine = null; 
-    }
-
-    private void GetCurrentWalkSprites()
-    {
-        Debug.Log("test");
-    //     if (!isWalking) return null;
-    //     float horizontal = Input.GetAxis("Horizontal");
-    //     float vertical = Input.GetAxis("Vertical");
-
-    //     if (vertical > 0) 
-    //     {
-    //         return walkUpSprites;
-    //     }
-    //     else if (vertical < 0) 
-    //     {
-    //         return walkDownSprites;
-    //     }
-    //     else if (horizontal < 0) 
-    //     {
-    //         return walkLeftSprites;
-    //     }
-    //     else if (horizontal > 0) 
-    //     {
-    //         return walkRightSprites;
-    //     }
-
-    //     return null;
+        Debug.Log("Movement");
     }
 
     public virtual void SpecialAbility() 
@@ -161,7 +77,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         if (CurrentHp <= 0)
         {
             Die();
-            // GameManager.Instance.GameOver(gameObject.name);
         }
         else
         {
