@@ -5,12 +5,10 @@ using System.Collections;
 public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 {
     public float speed;
-    // protected Vector2 movement;
 
     public int maxHP = 3;
     public int CurrentHp { get; private set; }
 
-    // protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
 
     public Sprite[] walkDownSprites;
@@ -26,6 +24,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     private Coroutine hurtEffectCoroutine;
     private bool isPushedBack = false;
     public GameManager gameManager;
+    public Animator animator;
+    protected Vector2 movement;
+    protected Rigidbody2D rb;
+    public bool canMove = true;
 
 
     protected virtual void Awake()
@@ -33,6 +35,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
         Debug.Log(spriteRenderer);
         gameManager = FindObjectOfType<GameManager>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Start()
@@ -50,16 +54,33 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
     }
 
+    private void FixedUpdate()
+    {
+        if (movement != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        }
+    }
+
+    public void OnMovement(InputValue value)
+    {
+        if (!canMove) return; 
+        if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
+        movement = value.Get<Vector2>();
+        if(movement.x != 0 || movement.y != 0) {
+            animator.SetFloat("X", movement.x);
+            animator.SetFloat("Y", movement.y);
+
+            animator.SetBool("IsWalking", true);
+        } else {
+             animator.SetBool("IsWalking", false);
+        }
+    }
+
     public void SetHP(int hp)
     {
         CurrentHp = hp;
         FindObjectOfType<HPDisplayManager>().UpdateHP(this); 
-    }
-
-
-    public virtual void OnMovement(InputValue value)
-    {
-        Debug.Log("Movement");
     }
 
     public virtual void SpecialAbility() 
