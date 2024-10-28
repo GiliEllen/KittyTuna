@@ -47,4 +47,6 @@ public class GameManager : MonoBehaviour
     public void ExitButton(){
         SceneManager.LoadScene("MainMenu");
     }
+
+    
 }

@@ -15,6 +15,7 @@ public class GameWinScreen : MonoBehaviour
         gameObject.SetActive(true);
         timerText.text = "Time elapsed: " + timeElapsed.ToString();
         float Bonus = timerPoints - timeElapsed;
+        float roundedBonus = Mathf.Floor(Bonus);
         if (Bonus <= 0) {
             Bonus = 0;
         }
