@@ -9,11 +9,12 @@ public class GrayCat : PlayableCharacter
     private Coroutine MeowEffectCoroutine;
     private Coroutine MeowAnimationCoroutine;
     public GameObject MeowEffectPrefab;
+    private AudioSource audioSource;
+
 
     private void Awake() {
         base.Awake();
         rb = GetComponent<Rigidbody2D>();
-        // animator = GetComponent<Animator>();
     }
 
     protected override void Start()
@@ -21,15 +22,9 @@ public class GrayCat : PlayableCharacter
         base.Start(); 
         catType = CatType.GrayCat;
         catName = "Meowy";
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // private void FixedUpdate()
-    // {
-    //     if (movement != Vector2.zero)
-    //     {
-    //         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-    //     }
-    // }
     public override void SpecialAbility()
     {
         base.SpecialAbility();
@@ -43,7 +38,7 @@ public class GrayCat : PlayableCharacter
     private async void PlayMeowAnimation()
     {   
         canMove = false;
-
+        PlaySoundEffect();
         movement.x = 0;
         movement.y = 0;
         animator.SetBool("IsMeow", true);
@@ -54,21 +49,6 @@ public class GrayCat : PlayableCharacter
         canMove = true;
     }
 
-    // public override void OnMovement(InputValue value)
-    // {
-    //     if (!canMove) return; 
-    //     if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
-    //     movement = value.Get<Vector2>();
-    //     if(movement.x != 0 || movement.y != 0) {
-    //         animator.SetFloat("X", movement.x);
-    //         animator.SetFloat("Y", movement.y);
-
-    //         animator.SetBool("IsWalking", true);
-    //     } else {
-    //          animator.SetBool("IsWalking", false);
-    //     }
-    // }
-
     private System.Collections.IEnumerator MeowEffect()
     {
         GameObject effect = Instantiate(MeowEffectPrefab, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
@@ -77,4 +57,13 @@ public class GrayCat : PlayableCharacter
         Destroy(effect);
     }
 
+    public async void PlaySoundEffect()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+            await Task.Delay(2000);
+            audioSource.Stop();
+        }
+    }
 }
