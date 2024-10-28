@@ -42,8 +42,6 @@ public class CalicoCat : PlayableCharacter
         PlayTripAnimation();
         if (TripEffectCoroutine != null) StopCoroutine(TripEffectCoroutine);
         TripEffectCoroutine = StartCoroutine(TripEffect());
-        // if (TripAnimationCoroutine != null) StopCoroutine(TripAnimationCoroutine);
-        // TripAnimationCoroutine = StartCoroutine(PlayTripAnimation());
     }
 
     private async void PlayTripAnimation()
@@ -63,7 +61,7 @@ public class CalicoCat : PlayableCharacter
     public override void OnMovement(InputValue value)
     {
         if (!canMove) return; 
-        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
         if(movement.x != 0 || movement.y != 0) {
             animator.SetFloat("X", movement.x);
@@ -73,7 +71,6 @@ public class CalicoCat : PlayableCharacter
         } else {
              animator.SetBool("IsWalking", false);
         }
-        // base.OnMovement(value); 
     }
 
     private IEnumerator TripEffect()

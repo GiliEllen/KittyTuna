@@ -30,9 +30,9 @@ public class BlackCat : PlayableCharacter
 
      private IEnumerator BlockInputCoroutine(float seconds)
     {
-        playerInput.enabled = false; // Disables the PlayerInput component
+        playerInput.enabled = false; 
         yield return new WaitForSeconds(seconds);
-        playerInput.enabled = true; // Re-enables the PlayerInput component
+        playerInput.enabled = true; 
     }
 
         public void BlockInputForSeconds(float seconds)
@@ -56,8 +56,6 @@ public class BlackCat : PlayableCharacter
         PlayDrinkAnimation();
         if (DrinkEffectCoroutine != null) StopCoroutine(DrinkEffectCoroutine);
         DrinkEffectCoroutine = StartCoroutine(DrinkEffect());
-        // if (DrinkAnimationCoroutine != null) StopCoroutine(DrinkAnimationCoroutine);
-        // DrinkAnimationCoroutine = StartCoroutine(PlayDrinkAnimation());
     }
 
     private async void PlayDrinkAnimation()
@@ -79,7 +77,7 @@ public class BlackCat : PlayableCharacter
     public override void OnMovement(InputValue value)
     {
         if (!canMove) return; 
-        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
         if(movement.x != 0 || movement.y != 0) {
             animator.SetFloat("X", movement.x);
@@ -89,7 +87,6 @@ public class BlackCat : PlayableCharacter
         } else {
              animator.SetBool("IsWalking", false);
         }
-        // base.OnMovement(value); 
     }
 
     private IEnumerator DrinkEffect()

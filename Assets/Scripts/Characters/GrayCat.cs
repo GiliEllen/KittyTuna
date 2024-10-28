@@ -41,8 +41,6 @@ public class GrayCat : PlayableCharacter
         PlayMeowAnimation();
         if (MeowEffectCoroutine != null) StopCoroutine(MeowEffectCoroutine);
         MeowEffectCoroutine = StartCoroutine(MeowEffect());
-        // if (MeowAnimationCoroutine != null) StopCoroutine(MeowAnimationCoroutine);
-        // MeowAnimationCoroutine = StartCoroutine(PlayMeowAnimation());
     }
 
     private async void PlayMeowAnimation()
@@ -62,8 +60,7 @@ public class GrayCat : PlayableCharacter
     public override void OnMovement(InputValue value)
     {
         if (!canMove) return; 
-        Debug.Log("why");
-        // if (!isWalking || FindObjectOfType<GameManager>().IsGameOver()) return;
+        if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
         if(movement.x != 0 || movement.y != 0) {
             animator.SetFloat("X", movement.x);
@@ -73,7 +70,6 @@ public class GrayCat : PlayableCharacter
         } else {
              animator.SetBool("IsWalking", false);
         }
-        // base.OnMovement(value); 
     }
 
     private System.Collections.IEnumerator MeowEffect()

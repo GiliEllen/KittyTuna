@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7222372784830217248}
   - component: {fileID: 282740837322271836}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HeartEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

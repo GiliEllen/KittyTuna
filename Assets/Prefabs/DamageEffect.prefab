@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049106536234439749}
   - component: {fileID: 6820373621669578856}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: DamageEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
