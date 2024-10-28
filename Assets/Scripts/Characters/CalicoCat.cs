@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class CalicoCat : PlayableCharacter
 {
@@ -38,29 +39,24 @@ public class CalicoCat : PlayableCharacter
         base.SpecialAbility();
         canMove = false;
         Debug.Log("CalicoCat uses special ability: trip the toddler.");
+        PlayTripAnimation();
         if (TripEffectCoroutine != null) StopCoroutine(TripEffectCoroutine);
         TripEffectCoroutine = StartCoroutine(TripEffect());
-        if (TripAnimationCoroutine != null) StopCoroutine(TripAnimationCoroutine);
-        TripAnimationCoroutine = StartCoroutine(PlayTripAnimation());
+        // if (TripAnimationCoroutine != null) StopCoroutine(TripAnimationCoroutine);
+        // TripAnimationCoroutine = StartCoroutine(PlayTripAnimation());
     }
 
-    private IEnumerator PlayTripAnimation()
+    private async void PlayTripAnimation()
     {
-        float animationDuration = 2f;
-        float elapsedTime = 0f;
-        int index = 0;
+        canMove = false;
 
-        while (elapsedTime < animationDuration)
-        {
-            spriteRenderer.sprite = TripAnimationFrames[index];
-            index = (index + 1) % TripAnimationFrames.Length;
+        movement.x = 0;
+        movement.y = 0;
+        animator.SetBool("IsTripping", true);
 
-            yield return new WaitForSeconds(0.25f); 
+        await Task.Delay(1500);
+        animator.SetBool("IsTripping", false);
 
-            elapsedTime += 0.25f; 
-        }
-
-        spriteRenderer.sprite = TripAnimationFrames[0];
         canMove = true;
     }
 

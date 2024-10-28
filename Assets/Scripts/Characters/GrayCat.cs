@@ -82,7 +82,6 @@ public class GrayCat : PlayableCharacter
         yield return new WaitForSeconds(2);
 
         Destroy(effect);
-        isWalking = true;
     }
 
 }

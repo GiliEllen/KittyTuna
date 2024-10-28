@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class BlackCat : PlayableCharacter
 {
@@ -12,6 +13,7 @@ public class BlackCat : PlayableCharacter
     private Animator animator;
     protected Vector2 movement;
     protected Rigidbody2D rb;
+     private PlayerInput playerInput;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +25,19 @@ public class BlackCat : PlayableCharacter
         base.Start(); 
         catType = CatType.BlackCat;
         catName = "Thirsty";
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+     private IEnumerator BlockInputCoroutine(float seconds)
+    {
+        playerInput.enabled = false; // Disables the PlayerInput component
+        yield return new WaitForSeconds(seconds);
+        playerInput.enabled = true; // Re-enables the PlayerInput component
+    }
+
+        public void BlockInputForSeconds(float seconds)
+    {
+        StartCoroutine(BlockInputCoroutine(seconds));
     }
 
     private void FixedUpdate()
@@ -38,30 +53,26 @@ public class BlackCat : PlayableCharacter
         base.SpecialAbility();
         canMove = false;
         Debug.Log("blackCat uses special ability: drink water from floor.");
-        // PlayDrinkAnimation();
+        PlayDrinkAnimation();
         if (DrinkEffectCoroutine != null) StopCoroutine(DrinkEffectCoroutine);
         DrinkEffectCoroutine = StartCoroutine(DrinkEffect());
-        if (DrinkAnimationCoroutine != null) StopCoroutine(DrinkAnimationCoroutine);
-        DrinkAnimationCoroutine = StartCoroutine(PlayDrinkAnimation());
+        // if (DrinkAnimationCoroutine != null) StopCoroutine(DrinkAnimationCoroutine);
+        // DrinkAnimationCoroutine = StartCoroutine(PlayDrinkAnimation());
     }
 
-    private IEnumerator PlayDrinkAnimation()
+    private async void PlayDrinkAnimation()
     {
-        float animationDuration = 2f;
-        float elapsedTime = 0f;
-        int index = 0;
+        BlockInputForSeconds(1.5f);
+        Debug.Log("Play Drink animation");
+        canMove = false;
 
-        while (elapsedTime < animationDuration)
-        {
-            spriteRenderer.sprite = DrinkAnimationFrames[index];
-            index = (index + 1) % DrinkAnimationFrames.Length;
+        movement.x = 0;
+        movement.y = 0;
+        animator.SetBool("IsDrinking", true);
 
-            yield return new WaitForSeconds(0.25f); 
+        await Task.Delay(1500);
+        animator.SetBool("IsDrinking", false);
 
-            elapsedTime += 0.25f; 
-        }
-
-        spriteRenderer.sprite = DrinkAnimationFrames[0];
         canMove = true;
     }
 
