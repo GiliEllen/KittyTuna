@@ -8,8 +8,18 @@ using TMPro;
 public class GameWinScreen : MonoBehaviour
 {
     public TextMeshProUGUI pointsText;
-    public void Setup(int score) {
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI timeElapsedBonusPoints;
+    private float timerPoints = 220;
+    public void Setup(int score, float timeElapsed) {
         gameObject.SetActive(true);
-        pointsText.text = score.ToString() + " POINTS";
+        timerText.text = "Time elapsed: " + timeElapsed.ToString();
+        float Bonus = timerPoints - timeElapsed;
+        if (Bonus <= 0) {
+            Bonus = 0;
+        }
+        timeElapsedBonusPoints.text = "Time Bonus: " + Bonus.ToString();
+        float newScore = score + Bonus;
+        pointsText.text = newScore.ToString() + " POINTS";
     }
 }

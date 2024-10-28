@@ -11,7 +11,14 @@ public class GameManager : MonoBehaviour
 
     public GameOverScreen GameOverScreen;
     public GameWinScreen GameWinScreen;
-     public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI timeText;
+
+    void Update()
+    {
+        float timeElapsed = Time.timeSinceLevelLoad;
+        timeText.text = timeElapsed.ToString("F2");
+    }
 
     public void AddPoint(int num) {
         points += num;
@@ -21,11 +28,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() {
         isGameOver = true;
+        
         GameOverScreen.Setup(points);
     }
     public void GameWin() {
         isGameOver = true;
-        GameWinScreen.Setup(points);
+        float timeElapsed = Time.timeSinceLevelLoad;
+        GameWinScreen.Setup(points, timeElapsed);
     }
 
     public bool IsGameOver() {
