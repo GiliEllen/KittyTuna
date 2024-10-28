@@ -76,6 +76,8 @@ MonoBehaviour:
   catName: 
   isWalking: 1
   gameManager: {fileID: 0}
+  animator: {fileID: 0}
+  canMove: 1
   MeowAnimationFrames:
   - {fileID: -1634150325, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
   - {fileID: 1290881696, guid: 5da9118b4498d2742868eed4dee6166b, type: 3}
@@ -168,7 +170,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &3927799607200635581
 CircleCollider2D:

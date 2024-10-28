@@ -33,7 +33,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     protected virtual void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
-        Debug.Log(spriteRenderer);
         gameManager = FindObjectOfType<GameManager>();
         rb = GetComponentInChildren<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
@@ -64,7 +63,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     public void OnMovement(InputValue value)
     {
-        if (!canMove) return; 
+        if (!canMove) {
+            Debug.Log("enter here");
+            return;
+            } 
         if (!canMove || FindObjectOfType<GameManager>().IsGameOver()) return;
         movement = value.Get<Vector2>();
         if(movement.x != 0 || movement.y != 0) {
@@ -102,11 +104,11 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         else
         {
             StartCoroutine(BlinkEffect());
-            Vector2 pushDirection = GetPushbackDirection();
-            if (!isPushedBack)
-            {
-                StartCoroutine(PushBack(pushDirection));
-            }
+            // Vector2 pushDirection = GetPushbackDirection();
+            // if (!isPushedBack)
+            // {
+            //     StartCoroutine(PushBack(pushDirection));
+            // }
         }
     }
 
@@ -114,6 +116,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         Debug.Log("blink");
         Debug.Log(spriteRenderer);
+        canMove = false;
+        movement = Vector2.zero;
         
         if (spriteRenderer == null) yield break;
         float blinkDuration = 2f;
@@ -129,58 +133,63 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
         }
 
         spriteRenderer.enabled = true; 
+        canMove = true;
     }
 
-    private Vector2 GetPushbackDirection()
-    {
-        if (spriteRenderer.sprite != null)
-        {
-            if (System.Array.Exists(walkUpSprites, sprite => sprite == spriteRenderer.sprite))
-            {
-                return Vector2.down;
-            }
-            else if (System.Array.Exists(walkDownSprites, sprite => sprite == spriteRenderer.sprite))
-            {
-                return Vector2.up;
-            }
-            else if (System.Array.Exists(walkLeftSprites, sprite => sprite == spriteRenderer.sprite))
-            {
-                return Vector2.right;
-            }
-            else if (System.Array.Exists(walkRightSprites, sprite => sprite == spriteRenderer.sprite))
-            {
-                return Vector2.left;
-            }
-        }
+    // private Vector2 GetPushbackDirection()
+    // {
+    //     if (spriteRenderer.sprite != null)
+    //     {
+    //         if (movement.y < 0)
+    //         {
+    //             return Vector2.down;
+    //         }
+    //         else if (movement.y > 0)
+    //         {
+    //             return Vector2.up;
+    //         }
+    //         else if (movement.x < 0)
+    //         {
+    //             return Vector2.right;
+    //         }
+    //         else if (movement.x > 0)
+    //         {
+    //             return Vector2.left;
+    //         }
+    //     }
 
-        return Vector2.zero; 
-    }
+    //     return Vector2.zero; 
+    // }
 
-    private IEnumerator PushBack(Vector2 pushDirection)
-    {
-        isPushedBack = true;
-        float pushDuration = 0.7f; 
-        float elapsedTime = 0f;
-        float pushSpeed = 15f; 
+    // private IEnumerator PushBack(Vector2 pushDirection)
+    // {
+    //     isPushedBack = true;
+    //     canMove = false;
+    //     float pushDuration = 0.7f; 
+    //     float elapsedTime = 0f;
+    //     float pushSpeed = 15f; 
+    //     Debug.Log("pushDirection: " + pushDirection);
 
-        while (elapsedTime < pushDuration)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, pushDirection, pushSpeed * Time.deltaTime);
+    //     while (elapsedTime < pushDuration)
+    //     {
+    //         RaycastHit2D hit = Physics2D.Raycast(transform.position, pushDirection, pushSpeed * Time.deltaTime);
+    //         Debug.Log("Raycast Hit: " + hit.collider?.name);
 
-            if (hit.collider != null)
-            {
-                break;
-            }
+    //         if (hit.collider != null)
+    //         {
+    //             break;
+    //         }
+    //         Vector2 newPosition = rb.position + pushDirection * pushSpeed * Time.deltaTime;
+    //         rb.MovePosition(newPosition);
 
-            // rb.MovePosition(rb.position + pushDirection * pushSpeed * Time.deltaTime);
+    //         elapsedTime += Time.deltaTime;
+    //         yield return null;
+    //     }
 
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        isPushedBack = false;
-        // movement = Vector2.zero; 
-    }
+    //     isPushedBack = false;
+    //     movement = Vector2.zero; 
+    //     canMove = true;
+    // }
 
     public virtual void Die()
     {

@@ -128,6 +128,8 @@ MonoBehaviour:
   catName: 
   isWalking: 1
   gameManager: {fileID: 0}
+  animator: {fileID: 0}
+  canMove: 1
   DrinkAnimationFrames:
   - {fileID: -304293824, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
   - {fileID: -558781863, guid: 49cb5e8069129cd4384802056d62c44c, type: 3}
@@ -162,7 +164,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &1200591676442724164
 CircleCollider2D:
