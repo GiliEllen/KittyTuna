@@ -14,10 +14,19 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI timeText;
 
-    void Update()
+void Update()
     {
         float timeElapsed = Time.timeSinceLevelLoad;
-        timeText.text = timeElapsed.ToString("F2");
+        timeText.text = FormatTime(timeElapsed);
+    }
+
+    private string FormatTime(float totalSeconds)
+    {
+        int minutes = Mathf.FloorToInt(totalSeconds / 60);
+        int seconds = Mathf.FloorToInt(totalSeconds % 60);
+        int milliseconds = Mathf.FloorToInt((totalSeconds - Mathf.Floor(totalSeconds)) * 1000);
+
+        return string.Format("{0:D2}:{1:D2}:{2:D3}", minutes, seconds, milliseconds);
     }
 
     public void AddPoint(int num) {
