@@ -15,6 +15,7 @@ public class GrayCat : PlayableCharacter
     protected Rigidbody2D rb;
 
     private void Awake() {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }

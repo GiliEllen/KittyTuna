@@ -16,13 +16,10 @@ public class BirdSpawner : MonoBehaviour
 
         if (isContainingBird) return;
 
-        Debug.Log("Bird Color: " + birdColor);
-
         Bird spawnedBird = Instantiate(birdPrefab, transform.position, Quaternion.identity);
         spawnedBird.spritesArray = birdSprites;
         spawnedBird.gameManager = gameManager;
         spawnedBird.SetSprite();
         isContainingBird = true;
-        Debug.Log(spawnedBird);
     }
 }

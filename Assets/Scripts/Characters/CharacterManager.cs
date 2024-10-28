@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
     private void Start()
     {
         currentCharacterIndex = Random.Range(0, characters.Length);
-        Debug.Log($"Selected Character Index: {currentCharacterIndex}");
+
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
         foreach (var cat in characters)
@@ -47,7 +47,6 @@ public class CharacterManager : MonoBehaviour
 
    private void SpawnCharacter(int index, Vector3 spawnPosition)
     {
-        Debug.Log($"Spawning Character: {characters[index].name}");
         currentCharacterInstance = Instantiate(characters[index], spawnPosition, Quaternion.identity);
 
         if (catHPs.TryGetValue(currentCharacterInstance.name, out int storedHP))

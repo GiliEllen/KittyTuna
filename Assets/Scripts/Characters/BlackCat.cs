@@ -13,9 +13,9 @@ public class BlackCat : PlayableCharacter
     private Animator animator;
     protected Vector2 movement;
     protected Rigidbody2D rb;
-     private PlayerInput playerInput;
 
     private void Awake() {
+         base.Awake();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -25,19 +25,6 @@ public class BlackCat : PlayableCharacter
         base.Start(); 
         catType = CatType.BlackCat;
         catName = "Thirsty";
-        playerInput = GetComponent<PlayerInput>();
-    }
-
-     private IEnumerator BlockInputCoroutine(float seconds)
-    {
-        playerInput.enabled = false; 
-        yield return new WaitForSeconds(seconds);
-        playerInput.enabled = true; 
-    }
-
-        public void BlockInputForSeconds(float seconds)
-    {
-        StartCoroutine(BlockInputCoroutine(seconds));
     }
 
     private void FixedUpdate()
@@ -60,7 +47,6 @@ public class BlackCat : PlayableCharacter
 
     private async void PlayDrinkAnimation()
     {
-        BlockInputForSeconds(1.5f);
         Debug.Log("Play Drink animation");
         canMove = false;
 
@@ -68,7 +54,7 @@ public class BlackCat : PlayableCharacter
         movement.y = 0;
         animator.SetBool("IsDrinking", true);
 
-        await Task.Delay(1500);
+        await Task.Delay(1300);
         animator.SetBool("IsDrinking", false);
 
         canMove = true;

@@ -30,8 +30,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     protected virtual void Awake()
     {
-        // rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
+        Debug.Log(spriteRenderer);
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -71,7 +71,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         CurrentHp -= howMuch;
         if (CurrentHp < 0) CurrentHp = 0;
-
+        Debug.Log(CurrentHp);
         FindObjectOfType<HPDisplayManager>().UpdateHP(this);
 
         if (CurrentHp <= 0)
@@ -91,6 +91,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
 
     private IEnumerator BlinkEffect()
     {
+        Debug.Log("blink");
+        Debug.Log(spriteRenderer);
+        
+        if (spriteRenderer == null) yield break;
         float blinkDuration = 2f;
         float elapsedTime = 0f;
         bool spriteVisible = true;

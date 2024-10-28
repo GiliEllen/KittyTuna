@@ -15,6 +15,7 @@ public class CalicoCat : PlayableCharacter
     protected Rigidbody2D rb;
 
     private void Awake() {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -52,7 +53,7 @@ public class CalicoCat : PlayableCharacter
         movement.y = 0;
         animator.SetBool("IsTripping", true);
 
-        await Task.Delay(1500);
+        await Task.Delay(1300);
         animator.SetBool("IsTripping", false);
 
         canMove = true;
