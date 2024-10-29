@@ -9,6 +9,8 @@ public class CalicoCat : PlayableCharacter
     private Coroutine TripEffectCoroutine;
     private Coroutine TripAnimationCoroutine;
     public GameObject TripEffectPrefab;
+     private AudioSource audioSource;
+
 
     private void Awake() {
         base.Awake();
@@ -19,6 +21,7 @@ public class CalicoCat : PlayableCharacter
         base.Start(); 
         catType = CatType.CalicoCat;
         catName = "Trippy";
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void SpecialAbility()
@@ -34,7 +37,7 @@ public class CalicoCat : PlayableCharacter
     private async void PlayTripAnimation()
     {
         canMove = false;
-
+        PlaySoundEffect();
         movement.x = 0;
         movement.y = 0;
         animator.SetBool("IsTripping", true);
@@ -52,6 +55,14 @@ public class CalicoCat : PlayableCharacter
 
         Destroy(effect);
         isWalking = true;
+    }
+
+    public void PlaySoundEffect()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 }
 
