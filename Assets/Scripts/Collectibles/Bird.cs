@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Bird : MonoBehaviour
 {
     public Sprite[] spritesArray;
     public GameManager gameManager;
     public SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+    private bool isCollected = false;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         if (spriteRenderer == null)
         {
@@ -29,9 +33,15 @@ public class Bird : MonoBehaviour
         }
     }
 
-    public void HandleCollected() {
-        gameObject.SetActive(false);
+    public async void HandleCollected() {
+        if (isCollected) return;
+
+        isCollected = true;
+        audioSource.Play();
+        spriteRenderer.enabled = false;
         gameManager.AddPoint(1);
+        await Task.Delay(2000);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
