@@ -9,6 +9,7 @@ public class CharacterManager : MonoBehaviour
     private PlayableCharacter currentCharacterInstance;
     private CinemachineVirtualCamera virtualCamera;
     private Dictionary<string, int> catHPs = new Dictionary<string, int>();
+    private AudioSource audioSource;
 
 
     private void Start()
@@ -23,12 +24,15 @@ public class CharacterManager : MonoBehaviour
         }
 
         SpawnCharacter(currentCharacterIndex, transform.position);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+            audioSource.time = 0.9f;
+            audioSource.Play();
             SwitchCharacter();
         }
     }
