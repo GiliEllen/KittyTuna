@@ -28,6 +28,7 @@ public class GrayCat : PlayableCharacter
     public override void SpecialAbility()
     {
         base.SpecialAbility();
+        isPlayingAnimation = true;
         canMove = false;
         Debug.Log("grayCat uses special ability: Meow to put the dog to sleep.");
         PlayMeowAnimation();
@@ -47,6 +48,7 @@ public class GrayCat : PlayableCharacter
         animator.SetBool("IsMeow", false);
 
         canMove = true;
+        isPlayingAnimation = false;
     }
 
     private System.Collections.IEnumerator MeowEffect()
@@ -60,10 +62,12 @@ public class GrayCat : PlayableCharacter
     public async void PlaySoundEffect()
     {
         if (audioSource != null)
-        {
+        {   
+            isPlayingAudio = true;
             audioSource.Play();
             await Task.Delay(2000);
             audioSource.Stop();
+            isPlayingAudio = false;
         }
     }
 }

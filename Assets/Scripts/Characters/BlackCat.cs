@@ -9,6 +9,8 @@ public class BlackCat : PlayableCharacter
     private Coroutine DrinkEffectCoroutine;
     private Coroutine DrinkAnimationCoroutine;
     public GameObject DrinkEffectPrefab;
+    private AudioSource audioSource;
+ 
 
     private void Awake() {
         base.Awake();
@@ -19,10 +21,11 @@ public class BlackCat : PlayableCharacter
         base.Start(); 
         catType = CatType.BlackCat;
         catName = "Thirsty";
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void SpecialAbility()
-    {
+    {   
         base.SpecialAbility();
         canMove = false;
         Debug.Log("blackCat uses special ability: drink water from floor.");
@@ -32,10 +35,11 @@ public class BlackCat : PlayableCharacter
     }
 
     private async void PlayDrinkAnimation()
-    {
+    {   
         Debug.Log("Play Drink animation");
         canMove = false;
-
+        isPlayingAnimation = true;
+        PlaySoundEffect();
         movement.x = 0;
         movement.y = 0;
         animator.SetBool("IsDrinking", true);
@@ -44,14 +48,26 @@ public class BlackCat : PlayableCharacter
         animator.SetBool("IsDrinking", false);
 
         canMove = true;
+        isPlayingAnimation = false;
     }
 
     private IEnumerator DrinkEffect()
-    {
+    {   
         GameObject effect = Instantiate(DrinkEffectPrefab, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
         yield return new WaitForSeconds(2);
 
         Destroy(effect);
         isWalking = true;
+    }
+
+    public async void PlaySoundEffect()
+    {
+        if (audioSource != null)
+        {   
+            isPlayingAudio = true; 
+            audioSource.Play();
+             await Task.Delay(2000);
+             isPlayingAudio = false;
+        }
     }
 }

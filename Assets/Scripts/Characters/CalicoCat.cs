@@ -9,7 +9,7 @@ public class CalicoCat : PlayableCharacter
     private Coroutine TripEffectCoroutine;
     private Coroutine TripAnimationCoroutine;
     public GameObject TripEffectPrefab;
-     private AudioSource audioSource;
+    private AudioSource audioSource;
 
 
     private void Awake() {
@@ -27,6 +27,7 @@ public class CalicoCat : PlayableCharacter
     public override void SpecialAbility()
     {
         base.SpecialAbility();
+        isPlayingAnimation = true;
         canMove = false;
         Debug.Log("CalicoCat uses special ability: trip the toddler.");
         PlayTripAnimation();
@@ -35,7 +36,7 @@ public class CalicoCat : PlayableCharacter
     }
 
     private async void PlayTripAnimation()
-    {
+    {   
         canMove = false;
         PlaySoundEffect();
         movement.x = 0;
@@ -46,6 +47,7 @@ public class CalicoCat : PlayableCharacter
         animator.SetBool("IsTripping", false);
 
         canMove = true;
+        isPlayingAnimation = false;
     }
 
     private IEnumerator TripEffect()
@@ -57,11 +59,14 @@ public class CalicoCat : PlayableCharacter
         isWalking = true;
     }
 
-    public void PlaySoundEffect()
-    {
+    public async void PlaySoundEffect()
+    {   
         if (audioSource != null)
-        {
+        {   
+            isPlayingAudio = true;
             audioSource.Play();
+            await Task.Delay(2000);
+            isPlayingAudio = false;
         }
     }
 }

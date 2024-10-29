@@ -10,6 +10,7 @@ public class CharacterManager : MonoBehaviour
     private CinemachineVirtualCamera virtualCamera;
     private Dictionary<string, int> catHPs = new Dictionary<string, int>();
 
+
     private void Start()
     {
         currentCharacterIndex = Random.Range(0, characters.Length);
@@ -34,6 +35,10 @@ public class CharacterManager : MonoBehaviour
 
     private void SwitchCharacter()
     {
+        if (currentCharacterInstance.isPlayingAnimation || currentCharacterInstance.isPlayingAudio) {
+            return;
+        }
+
         Vector3 currentPosition = currentCharacterInstance.transform.position;
         if (currentCharacterInstance != null)
         {
@@ -60,4 +65,7 @@ public class CharacterManager : MonoBehaviour
 
         virtualCamera.Follow = currentCharacterInstance.transform;
     }
+
+
+
 }

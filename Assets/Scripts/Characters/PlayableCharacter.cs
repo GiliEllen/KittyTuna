@@ -28,6 +28,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     protected Vector2 movement;
     protected Rigidbody2D rb;
     public bool canMove = true;
+    public bool isPlayingAnimation = false;
+    public bool isPlayingAudio = false;
 
 
     protected virtual void Awake()
